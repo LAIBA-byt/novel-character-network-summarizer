@@ -1,12 +1,13 @@
-StoryGraph: Novel Character Network & Story Summarizer
+StoryGraph: Novel Character Network & Summarizer
 
 An NLP and network analysis project that extracts characters from a novel, builds a character relationship network, and generates an abstractive summary of a story passage.
 
-The demo uses Alice's Adventures in Wonderland (Project Gutenberg).
+The demo uses the novel Alice's Adventures in Wonderland from Project Gutenberg.
+
 Features
 Character extraction: finds PERSON entities with spaCy Named Entity Recognition and shortlists the most frequent characters.
 Co-occurrence network: two characters appearing in the same sentence are connected by an edge. The edge weight grows with how often they appear together.
-Interactive visualization: the network is shown as a zoomable, draggable HTML graph (PyVis), with a static Matplotlib plot as well.
+Interactive visualization: the network is shown as a zoomable, draggable HTML graph (PyVis), along with a static Matplotlib plot.
 Abstractive summarization: a passage from the novel is summarized with the pre-trained BART model (facebook/bart-large-cnn).
 Tech Stack
 Purpose	Tool
@@ -23,22 +24,22 @@ Graph building: for each sentence, every pair of top characters found together g
 Visualization: the graph is exported to an interactive HTML file with PyVis.
 Summarization: a text segment is passed to BART to generate a short summary.
 Installation
+
+Download or clone this repository, open the project folder, and install the dependencies:
+
 bash
-git clone https://github.com/LAIBA-byt/<repo-name>.git
-cd <repo-name>
 pip install spacy networkx pyvis matplotlib transformers torch
 python -m spacy download en_core_web_sm
 Usage
 
-Open the notebook in Google Colab or VS Code and run the cells in order. The interactive graph is saved as an .html file (for example character_network.html). Open it in any browser.
-Sample Output
+Open the notebook in Google Colab or VS Code and run the cells in order. The interactive graph is saved as an HTML file (for example character_network.html). Open it in any web browser.
+#Sample Output
 Top characters found: Alice, Mouse, Bill, William, Mabel, Mary Ann, Duck, Edwin, Mercia, Caucus
-Add a screenshot of the network graph here: ![Character Network](images/network.png)
-Add the generated summary here.
+The notebook also produces a character relationship graph and a short BART-generated summary of the selected passage.
 Limitations
 NER runs on only the first 50,000 characters of the text, so the network does not cover the whole novel.
 Summarization is done on a single segment (text[1000:4000]), not the full book.
-spaCy's small model sometimes mislabels non-character words as PERSON (for example, "Caucus" is a race, not a character).
+spaCy's small model sometimes labels non-character words as PERSON (for example, "Caucus" is a race, not a character).
 The same character may appear under different names (for example, "Mary Ann").
 BART is used as-is (pre-trained, no fine-tuning).
 Future Improvements
@@ -48,4 +49,4 @@ Chunk-wise summarization of the entire book.
 Use a larger spaCy model for better NER accuracy.
 Author
 
-Laiba Afzal, BS Software Engineering, University of Okara GitHub: LAIBA-byt
+Laiba Afzal BS Software Engineering, University of Okara
